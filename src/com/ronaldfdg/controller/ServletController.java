@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.ronaldfdg.bd.DataBaseConnection;
 import com.ronaldfdg.dto.Persona;
 import com.ronaldfdg.services.PersonaService;
 import com.ronaldfdg.servicesImpl.PersonaServiceImpl;
@@ -30,6 +31,8 @@ public class ServletController extends HttpServlet {
 			this.listarPersonas(request, response);
 		} else if ("eliminarPersona".equals(accion)) {
 			this.eliminarPersona(request, response);
+		} else if ("agregarPersona".equals(accion)) {
+			this.agregarPersona(request, response);
 		}
 	}
 
@@ -58,17 +61,46 @@ public class ServletController extends HttpServlet {
 		PersonaService personaService = new PersonaServiceImpl();
 		int idPersona = Integer.parseInt(request.getParameter("idPersona"));
 		List<Persona> listPeople = personaService.getAllPeople();
-		int currentPeople = listPeople.size()-1;
+		int amountPeople = listPeople.size()-1;
 		String mensaje = null;
 		
 		personaService.deletePerson(idPersona);
 		
 		listPeople = personaService.getAllPeople();
 		
-		if(currentPeople == listPeople.size()) 
+		if(amountPeople == listPeople.size()) 
 			mensaje="La persona ha sido eliminada correctamente";
 		
 		
+		
+		request.setAttribute("mensaje", mensaje);
+		request.setAttribute("listPeople", listPeople);
+		request.getRequestDispatcher("/WEB-INF/pages/listadoPersonas.jsp").forward(request, response);
+	}
+	
+	protected void agregarPersona(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException, SQLException{
+		PersonaService personaService = new PersonaServiceImpl();
+		
+		List<Persona> listPeople = personaService.getAllPeople();
+		int amountPeople = listPeople.size() + 1;
+		String mensaje = null;
+		
+		int idPersona = Integer.parseInt(request.getParameter("idPersona"));
+		String nombre = request.getParameter("nombre");
+		String apellido = request.getParameter("apellido");
+		
+		Persona persona = new Persona();
+		persona.setIdPersona(idPersona);
+		persona.setNombre(nombre);
+		persona.setApellidos(apellido);
+		
+		personaService.savePerson(persona);
+		
+		listPeople = personaService.getAllPeople();
+		
+		if(amountPeople == listPeople.size())
+			mensaje = "Se agrego la persona correctamente";
 		
 		request.setAttribute("mensaje", mensaje);
 		request.setAttribute("listPeople", listPeople);

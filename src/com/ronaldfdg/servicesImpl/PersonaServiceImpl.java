@@ -25,7 +25,13 @@ public class PersonaServiceImpl implements PersonaService{
 	@Override
 	public void savePerson(Persona persona) {
 		 
-		
+		try {
+			PersonaJDBC personaJDBC = new PersonaJDBC(DataBaseConnection.getConnection());
+			personaJDBC.insert(persona);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		 		
 	}
 
 	@Override

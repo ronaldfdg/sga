@@ -22,7 +22,7 @@
 			<td>${ persona.nombre }</td>
 			<td>${ persona.apellidos }</td>
 			<td>
-				<a href="editarPersona.jsp">
+				<a href="">
 					<input type="button" value="Editar">
 				</a>
 			</td>		
@@ -35,5 +35,10 @@
 		</c:forEach>
 		
 	</table>
+	
+	<a href="registroPersona.jsp">
+		Agregar una nueva persona
+	</a>
+	
 </body>
 </html>
