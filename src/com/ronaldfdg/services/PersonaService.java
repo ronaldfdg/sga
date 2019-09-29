@@ -11,6 +11,6 @@ public interface PersonaService {
 	public Persona getPersonaById(int idPersona) throws SQLException;
 	public void savePerson(Persona persona) throws SQLException;
 	public void deletePerson(int idPersona) throws SQLException;
+	public int updatePerson(Persona persona) throws SQLException;
 	
-
 }
