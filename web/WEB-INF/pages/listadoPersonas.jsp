@@ -22,7 +22,7 @@
 			<td>${ persona.nombre }</td>
 			<td>${ persona.apellidos }</td>
 			<td>
-				<a href="">
+				<a href="${ pageContext.request.contextPath }/ServletController?accion=obtenerPersona&idPersona=${persona.idPersona}">
 					<input type="button" value="Editar">
 				</a>
 			</td>		

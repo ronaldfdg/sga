@@ -99,4 +99,66 @@ public class PersonaJDBC {
 		}
 	}
 
+	public Persona getPerson(int idPersona) {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		Persona persona = null;
+
+		try {
+			connection = (this.connection != null) ? this.connection : DataBaseConnection.getConnection();
+			preparedStatement = connection.prepareStatement("select * from persona where id_persona = ?");
+			preparedStatement.setInt(1, idPersona);
+			resultSet = preparedStatement.executeQuery();
+
+			persona = new Persona();
+
+			while (resultSet.next()) {
+
+				String nombre = resultSet.getString("nombre");
+				String apellido = resultSet.getString("apellido");
+
+				persona.setIdPersona(idPersona);
+				persona.setNombre(nombre);
+				persona.setApellidos(apellido);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DataBaseConnection.close(connection);
+			DataBaseConnection.close(preparedStatement);
+			DataBaseConnection.close(resultSet);
+		}
+
+		return persona;
+	}
+
+	public int update(Persona persona) {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		int rows = 0;
+		int index = 1;
+
+		try {
+			connection = (this.connection != null) ? this.connection : DataBaseConnection.getConnection();
+			preparedStatement = connection.prepareStatement(
+					"update persona set nombre = ?, apellido = ? where id_persona = ?");
+			
+			preparedStatement.setString(index++, persona.getNombre());
+			preparedStatement.setString(index++, persona.getApellidos());
+			preparedStatement.setInt(index, persona.getIdPersona());
+			
+			rows = preparedStatement.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DataBaseConnection.close(connection);
+			DataBaseConnection.close(preparedStatement);
+		}
+		
+		return rows;
+	}
+
 }

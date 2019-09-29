@@ -17,32 +17,29 @@ public class PersonaServiceImpl implements PersonaService{
 	}
 
 	@Override
-	public Persona getPersonaById(int idPersona) {
-		 
-		return null;
+	public Persona getPersonaById(int idPersona) throws SQLException{
+		 PersonaJDBC personaJDBC = new PersonaJDBC(DataBaseConnection.getConnection());
+		 return personaJDBC.getPerson(idPersona);
 	}
 
 	@Override
-	public void savePerson(Persona persona) {
-		 
-		try {
-			PersonaJDBC personaJDBC = new PersonaJDBC(DataBaseConnection.getConnection());
-			personaJDBC.insert(persona);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+	public void savePerson(Persona persona) throws SQLException{
+		PersonaJDBC personaJDBC = new PersonaJDBC(DataBaseConnection.getConnection());
+		personaJDBC.insert(persona);
 		 		
 	}
 
 	@Override
-	public void deletePerson(int idPersona) {
+	public void deletePerson(int idPersona) throws SQLException{
+		PersonaJDBC personaJDBC = new PersonaJDBC(DataBaseConnection.getConnection());
+		personaJDBC.delete(idPersona);
 		
-		try {
-			PersonaJDBC personaJDBC = new PersonaJDBC(DataBaseConnection.getConnection());
-			personaJDBC.delete(idPersona);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+	}
+
+	@Override
+	public int updatePerson(Persona persona) throws SQLException {
+		 PersonaJDBC personaJDBC = new PersonaJDBC(DataBaseConnection.getConnection());
+		 return personaJDBC.update(persona);
 		
 	}
 	
