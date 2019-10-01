@@ -9,11 +9,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import com.ronaldfdg.bd.DataBaseConnection;
 import com.ronaldfdg.dto.Persona;
+import com.ronaldfdg.dto.Usuario;
 import com.ronaldfdg.services.PersonaService;
+import com.ronaldfdg.services.UsuarioService;
 import com.ronaldfdg.servicesImpl.PersonaServiceImpl;
+import com.ronaldfdg.servicesImpl.UsuarioServiceImpl;
 
 @WebServlet(name = "ServletController", urlPatterns = { "/ServletController" })
 public class ServletController extends HttpServlet {
@@ -37,6 +40,8 @@ public class ServletController extends HttpServlet {
 			this.obtenerPersona(request, response);
 		} else if ("editarPersona".equals(accion)) {
 			this.editarPersona(request, response);
+		} else if("cerrarSesion".equals(accion)) {
+			this.cerrarSesion(request, response);
 		}
 	}
 
@@ -145,6 +150,15 @@ public class ServletController extends HttpServlet {
 		request.setAttribute("mensaje", mensaje);
 		request.setAttribute("listPeople", listPeople);
 		request.getRequestDispatcher("/WEB-INF/pages/listadoPersonas.jsp").forward(request, response);
+
+	}
+	
+	protected void cerrarSesion(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		
+		HttpSession session = request.getSession();
+		session.invalidate();
+		request.getRequestDispatcher("login.jsp").forward(request, response);
 
 	}
 

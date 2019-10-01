@@ -7,6 +7,12 @@
 <body>
 	<h1>Listado de Personas</h1>
 	<br>
+	
+	<div style="float:left;">
+		<a href="${pageContext.request.contextPath}/ServletController?accion=cerrarSesion">Cerrar sesi&oacute;n</a>
+	</div>
+	
+	<br>
 	<c:if test="${mensaje!=null}">
 		<label>${mensaje}</label>
 	</c:if>
