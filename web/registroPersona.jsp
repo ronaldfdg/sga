@@ -5,6 +5,12 @@
 </head>
 <body>
 	<h1>Registrar persona</h1>
+	<br>
+	
+	<div style="float:left;">
+		<a href="${pageContext.request.contextPath}/ServletController?accion=cerrarSesion">Cerrar sesi&oacute;n</a>
+	</div>
+	
 	<form action="${ pageContext.request.contextPath }/ServletController?accion=agregarPersona" method="post" name="formulario" onsubmit="return validarFormulario(this);">
 		<table>
 			<tr>

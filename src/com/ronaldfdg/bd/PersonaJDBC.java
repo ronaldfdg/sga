@@ -13,6 +13,10 @@ public class PersonaJDBC {
 
 	private Connection connection;
 	private static final String SQL_SELECT = "select * from persona order by id_persona asc";
+	private static final String SQL_DELETE = "delete from persona where id_persona = ?";
+	private static final String SQL_INSERT = "insert into persona (id_persona,nombre,apellido) values (?,?,?)";
+	private static final String SQL_SELECT_BY_IDPERSONA = "select * from persona where id_persona = ?";
+	private static final String SQL_UPDATE = "update persona set nombre = ?, apellido = ? where id_persona = ?";
 
 	public PersonaJDBC() {
 
@@ -61,7 +65,7 @@ public class PersonaJDBC {
 		PreparedStatement preparedStatement = null;
 		try {
 			connection = (this.connection != null) ? this.connection : DataBaseConnection.getConnection();
-			preparedStatement = connection.prepareStatement("delete from persona where id_persona = ?");
+			preparedStatement = connection.prepareStatement(SQL_DELETE);
 			preparedStatement.setInt(1, idPersona);
 			int rows = preparedStatement.executeUpdate();
 			System.out.println("Filas afectadas: " + rows);
@@ -81,8 +85,7 @@ public class PersonaJDBC {
 
 		try {
 			connection = (this.connection != null) ? this.connection : DataBaseConnection.getConnection();
-			preparedStatement = connection
-					.prepareStatement("insert into persona (id_persona,nombre,apellido) values (?,?,?)");
+			preparedStatement = connection.prepareStatement(SQL_INSERT);
 
 			preparedStatement.setInt(index++, persona.getIdPersona());
 			preparedStatement.setString(index++, persona.getNombre());
@@ -107,7 +110,7 @@ public class PersonaJDBC {
 
 		try {
 			connection = (this.connection != null) ? this.connection : DataBaseConnection.getConnection();
-			preparedStatement = connection.prepareStatement("select * from persona where id_persona = ?");
+			preparedStatement = connection.prepareStatement(SQL_SELECT_BY_IDPERSONA);
 			preparedStatement.setInt(1, idPersona);
 			resultSet = preparedStatement.executeQuery();
 
@@ -142,8 +145,7 @@ public class PersonaJDBC {
 
 		try {
 			connection = (this.connection != null) ? this.connection : DataBaseConnection.getConnection();
-			preparedStatement = connection.prepareStatement(
-					"update persona set nombre = ?, apellido = ? where id_persona = ?");
+			preparedStatement = connection.prepareStatement(SQL_UPDATE);
 			
 			preparedStatement.setString(index++, persona.getNombre());
 			preparedStatement.setString(index++, persona.getApellidos());

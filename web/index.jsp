@@ -9,6 +9,10 @@
 	
 	<br>
 	
+	<div style="float:left;">
+		<a href="${pageContext.request.contextPath}/ServletController?accion=cerrarSesion">Cerrar sesi&oacute;n</a>
+	</div>
+	
 	<a href="${ pageContext.request.contextPath }/ServletController?accion=listarPersonas">
 		Listado de Personas
 	</a>

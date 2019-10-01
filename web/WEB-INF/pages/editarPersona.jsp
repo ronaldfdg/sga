@@ -6,7 +6,12 @@
 </head>
 <body>
 	<h1>Editar Persona</h1>
-
+	<br>
+	
+	<div style="float:left;">
+		<a href="${pageContext.request.contextPath}/ServletController?accion=cerrarSesion">Cerrar sesi&oacute;n</a>
+	</div>
+	
 	<form action="${ pageContext.request.contextPath }/ServletController?accion=editarPersona" method="post" name="formulario" onsubmit="return validarFormulario(this);">
 		<% Persona persona = (Persona) request.getAttribute("persona"); %>
 		<table>
