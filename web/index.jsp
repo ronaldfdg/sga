@@ -10,10 +10,10 @@
 	<br>
 	
 	<div style="float:left;">
-		<a href="${pageContext.request.contextPath}/ServletController?accion=cerrarSesion">Cerrar sesi&oacute;n</a>
+		<a href="${pageContext.request.contextPath}/ServletControllerUsuario?accion=cerrarSesion">Cerrar sesi&oacute;n</a>
 	</div>
 	
-	<a href="${ pageContext.request.contextPath }/ServletController?accion=listarPersonas">
+	<a href="${ pageContext.request.contextPath }/ServletControllerPersona?accion=listarPersonas">
 		Listado de Personas
 	</a>
 	

@@ -15,5 +15,6 @@
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
 	<classpathentry kind="lib" path="R:/Cursos Udemy/Universidad Java/Java con JDBC - Pdfs/jdbc-driver/mysql-driver.jar"/>
 	<classpathentry kind="lib" path="R:/jstl-1.2.jar"/>
+	<classpathentry kind="lib" path="R:/jsf-api-2.2.20.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

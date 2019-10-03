@@ -9,12 +9,15 @@
 	<br>
 	
 	<div style="float:left;">
-		<a href="${pageContext.request.contextPath}/ServletController?accion=cerrarSesion">Cerrar sesi&oacute;n</a>
+		<a href="${pageContext.request.contextPath}/ServletControllerUsuario?accion=cerrarSesion">Cerrar sesi&oacute;n</a>
 	</div>
 	
-	<form action="${ pageContext.request.contextPath }/ServletController?accion=editarPersona" method="post" name="formulario" onsubmit="return validarFormulario(this);">
+	<form action="${ pageContext.request.contextPath }/ServletControllerPersona" method="post" name="formulario" onsubmit="return validarFormulario(this);">
 		<% Persona persona = (Persona) request.getAttribute("persona"); %>
 		<table>
+			<tr>
+				<td><input type="hidden" name="accion" value="editarPersona"></td>
+			</tr>
 			<tr>
 				<td><input type="hidden" name="idPersona" value="${persona.idPersona}"></td>
 			</tr>
@@ -31,6 +34,7 @@
 					<input type="submit" value="Editar">
 				</td>
 			</tr>
+			
 		</table>
 	</form>
 </body>

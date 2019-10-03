@@ -17,6 +17,17 @@
     <filter-name>Filtro</filter-name>
     <url-pattern>/index.jsp</url-pattern>
     <url-pattern>/registroPersona.jsp</url-pattern>
-    <url-pattern>/ServletController</url-pattern>
+    <url-pattern>/ServletControllerPersona</url-pattern>
+  </filter-mapping>
+  <filter>
+  	<filter-name>FiltroCache</filter-name>
+  	<filter-class>com.ronaldfdg.filter.FiltroCache</filter-class>
+  </filter>
+  <filter-mapping>
+  	<filter-name>FiltroCache</filter-name>
+  	<url-pattern>/ServletControllerPersona</url-pattern>
+  	<url-pattern>/ServletControllerUsuario</url-pattern>
+  	<url-pattern>/index.jsp</url-pattern>
+  	<url-pattern>/registroPersona.jsp</url-pattern>
   </filter-mapping>
 </web-app>

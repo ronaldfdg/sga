@@ -7,7 +7,10 @@
 <body>
 	<h1>Servlet SGA</h1>
 	<div style="margin:auto;">
-		<form name="formLogin" action="${pageContext.request.contextPath}/ValidarUsuarioServlet" method="post">
+		<form name="formLogin" action="${pageContext.request.contextPath}/ServletControllerUsuario" method="post">
+		
+			<input type="hidden" name="accion" value="validarUsuario">
+	
 			<label>Ingresar cuenta de usuario</label>
 			<br>
 			<label>Usuario:</label>

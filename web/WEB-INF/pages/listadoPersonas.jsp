@@ -7,12 +7,7 @@
 <body>
 	<h1>Listado de Personas</h1>
 	<br>
-	
-	<div style="float:left;">
-		<a href="${pageContext.request.contextPath}/ServletController?accion=cerrarSesion">Cerrar sesi&oacute;n</a>
-	</div>
-	
-	<br>
+
 	<c:if test="${mensaje!=null}">
 		<label>${mensaje}</label>
 	</c:if>
@@ -23,17 +18,18 @@
 			<th>Apellido</th>
 		</tr>
 		<c:forEach var="persona" items="${ listPeople }">
+		<input type="hidden" name="idPersona" value="${persona.idPersona}">
 		<tr>
 			<td>${ persona.idPersona }</td>
 			<td>${ persona.nombre }</td>
 			<td>${ persona.apellidos }</td>
 			<td>
-				<a href="${ pageContext.request.contextPath }/ServletController?accion=obtenerPersona&idPersona=${persona.idPersona}">
+				<a href="${ pageContext.request.contextPath }/ServletControllerPersona?accion=obtenerPersona&idPersona=${persona.idPersona}">
 					<input type="button" value="Editar">
 				</a>
 			</td>		
 			<td>
-				<a href="${ pageContext.request.contextPath }/ServletController?accion=eliminarPersona&idPersona=${persona.idPersona}">
+				<a href="${ pageContext.request.contextPath }/ServletControllerPersona?accion=eliminarPersona&idPersona=${persona.idPersona}">
 					<input type="button" value="Eliminar">
 				</a>
 			</td>
@@ -45,6 +41,7 @@
 	<a href="registroPersona.jsp">
 		Agregar una nueva persona
 	</a>
-	
+	<br>
+	<a href="${pageContext.request.contextPath}/ServletControllerUsuario?accion=cerrarSesion">Cerrar sesi&oacute;n</a>
 </body>
 </html>

@@ -8,11 +8,14 @@
 	<br>
 	
 	<div style="float:left;">
-		<a href="${pageContext.request.contextPath}/ServletController?accion=cerrarSesion">Cerrar sesi&oacute;n</a>
+		<a href="${pageContext.request.contextPath}/ServletControllerUsuario?accion=cerrarSesion">Cerrar sesi&oacute;n</a>
 	</div>
 	
-	<form action="${ pageContext.request.contextPath }/ServletController?accion=agregarPersona" method="post" name="formulario" onsubmit="return validarFormulario(this);">
+	<form action="${ pageContext.request.contextPath }/ServletControllerPersona" method="post" name="formulario" onsubmit="return validarFormulario(this);">
 		<table>
+		
+			<input type="hidden" name="accion" value="agregarPersona">
+			
 			<tr>
 				<td>Id: </td>
 				<td><input type="number" name="idPersona"></td>

@@ -12,17 +12,14 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.ronaldfdg.dto.Persona;
-import com.ronaldfdg.dto.Usuario;
 import com.ronaldfdg.services.PersonaService;
-import com.ronaldfdg.services.UsuarioService;
 import com.ronaldfdg.servicesImpl.PersonaServiceImpl;
-import com.ronaldfdg.servicesImpl.UsuarioServiceImpl;
 
-@WebServlet(name = "ServletController", urlPatterns = { "/ServletController" })
-public class ServletController extends HttpServlet {
+@WebServlet(name = "ServletControllerPersona", urlPatterns = { "/ServletControllerPersona" })
+public class ServletControllerPersona extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	public ServletController() {
+	public ServletControllerPersona() {
 		super();
 	}
 
@@ -40,9 +37,8 @@ public class ServletController extends HttpServlet {
 			this.obtenerPersona(request, response);
 		} else if ("editarPersona".equals(accion)) {
 			this.editarPersona(request, response);
-		} else if("cerrarSesion".equals(accion)) {
-			this.cerrarSesion(request, response);
-		}
+		} 
+		
 	}
 
 	protected void listarPersonas(HttpServletRequest request, HttpServletResponse response)
@@ -50,6 +46,8 @@ public class ServletController extends HttpServlet {
 
 		PersonaService personaService = new PersonaServiceImpl();
 		List<Persona> listPeople = personaService.getAllPeople();
+		HttpSession session = request.getSession();
+		String usuario = (String) session.getAttribute("usuario");
 		String mensaje = null;
 
 		if (listPeople != null && listPeople.size() > 0)
@@ -58,8 +56,11 @@ public class ServletController extends HttpServlet {
 			mensaje = "No hay registro de alguna persona";
 
 		request.setAttribute("mensaje", mensaje);
-
-		request.getRequestDispatcher("/WEB-INF/pages/listadoPersonas.jsp").forward(request, response);
+		
+		if(usuario!=null)
+			request.getRequestDispatcher("/WEB-INF/pages/listadoPersonas.jsp").forward(request, response);
+		else
+			response.sendRedirect(request.getServletPath()+"/login.jsp");
 
 	}
 
@@ -146,19 +147,10 @@ public class ServletController extends HttpServlet {
 		if (rows > 0) {
 			mensaje = "Persona modificada";
 		}
-		
+
 		request.setAttribute("mensaje", mensaje);
 		request.setAttribute("listPeople", listPeople);
 		request.getRequestDispatcher("/WEB-INF/pages/listadoPersonas.jsp").forward(request, response);
-
-	}
-	
-	protected void cerrarSesion(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		
-		HttpSession session = request.getSession();
-		session.invalidate();
-		request.getRequestDispatcher("login.jsp").forward(request, response);
 
 	}
 
