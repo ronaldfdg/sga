@@ -1,10 +1,13 @@
 package com.ronaldfdg.dto;
 
+import java.util.Arrays;
+
 public class Persona {
 
 	private int idPersona;
 	private String nombre;
 	private String apellidos;
+	private byte[] foto;
 	
 	public Persona() {
 		
@@ -34,9 +37,19 @@ public class Persona {
 		this.apellidos = apellidos;
 	}
 
+	public byte[] getFoto() {
+		return foto;
+	}
+
+	public void setFoto(byte[] foto) {
+		this.foto = foto;
+	}
+
 	@Override
 	public String toString() {
-		return "Persona [idPersona=" + idPersona + ", nombre=" + nombre + ", apellidos=" + apellidos + "]";
+		return "Persona [idPersona=" + idPersona + ", nombre=" + nombre + ", apellidos=" + apellidos + ", imagen="
+				+ Arrays.toString(foto) + "]";
 	}
+	
 		
 }

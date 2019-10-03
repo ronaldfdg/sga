@@ -11,10 +11,9 @@
 		<a href="${pageContext.request.contextPath}/ServletControllerUsuario?accion=cerrarSesion">Cerrar sesi&oacute;n</a>
 	</div>
 	
-	<form action="${ pageContext.request.contextPath }/ServletControllerPersona" method="post" name="formulario" onsubmit="return validarFormulario(this);">
+	<form action="${ pageContext.request.contextPath }/ServletControllerPersona?accion=agregarPersona" method="post" name="formulario" 
+			enctype="multipart/form-data" onsubmit="return validarFormulario(this);">
 		<table>
-		
-			<input type="hidden" name="accion" value="agregarPersona">
 			
 			<tr>
 				<td>Id: </td>
@@ -29,10 +28,15 @@
 				<td><input type="text" name="apellido"></td>
 			</tr>
 			<tr>
+				<td>Foto:</td>
+				<td><input type="file" name="foto"></td>
+			</tr>
+			<tr>
 				<td>
 					<input type="submit" value="Registrar">
 				</td>
 			</tr>
+			
 		</table>
 	</form>
 </body>

@@ -19,7 +19,7 @@ public class PersonaServiceImpl implements PersonaService{
 	@Override
 	public Persona getPersonaById(int idPersona) throws SQLException{
 		 PersonaJDBC personaJDBC = new PersonaJDBC(DataBaseConnection.getConnection());
-		 return personaJDBC.getPerson(idPersona);
+		 return personaJDBC.getPersonById(idPersona);
 	}
 
 	@Override

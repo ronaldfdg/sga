@@ -14,9 +14,9 @@ public class PersonaJDBC {
 	private Connection connection;
 	private static final String SQL_SELECT = "select * from persona order by id_persona asc";
 	private static final String SQL_DELETE = "delete from persona where id_persona = ?";
-	private static final String SQL_INSERT = "insert into persona (id_persona,nombre,apellido) values (?,?,?)";
+	private static final String SQL_INSERT = "insert into persona (id_persona,nombre,apellido,foto) values (?,?,?,?)";
 	private static final String SQL_SELECT_BY_IDPERSONA = "select * from persona where id_persona = ?";
-	private static final String SQL_UPDATE = "update persona set nombre = ?, apellido = ? where id_persona = ?";
+	private static final String SQL_UPDATE = "update persona set nombre = ?, apellido = ?, foto = ? where id_persona = ?";
 
 	public PersonaJDBC() {
 
@@ -43,10 +43,12 @@ public class PersonaJDBC {
 				int idPersona = resultSet.getInt("id_persona");
 				String nombre = resultSet.getString("nombre");
 				String apellido = resultSet.getString("apellido");
+				byte[] foto = resultSet.getBytes("foto");
 				persona = new Persona();
 				persona.setIdPersona(idPersona);
 				persona.setNombre(nombre);
 				persona.setApellidos(apellido);
+				persona.setFoto(foto);
 				listPeople.add(persona);
 			}
 
@@ -89,7 +91,8 @@ public class PersonaJDBC {
 
 			preparedStatement.setInt(index++, persona.getIdPersona());
 			preparedStatement.setString(index++, persona.getNombre());
-			preparedStatement.setString(index, persona.getApellidos());
+			preparedStatement.setString(index++, persona.getApellidos());
+			preparedStatement.setBytes(index, persona.getFoto());
 
 			rows = preparedStatement.executeUpdate();
 			System.out.println("Filas afectadas: " + rows);
@@ -102,7 +105,7 @@ public class PersonaJDBC {
 		}
 	}
 
-	public Persona getPerson(int idPersona) {
+	public Persona getPersonById(int idPersona) {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
@@ -120,10 +123,12 @@ public class PersonaJDBC {
 
 				String nombre = resultSet.getString("nombre");
 				String apellido = resultSet.getString("apellido");
+				byte[] foto = resultSet.getBytes("foto");
 
 				persona.setIdPersona(idPersona);
 				persona.setNombre(nombre);
 				persona.setApellidos(apellido);
+				persona.setFoto(foto);
 			}
 
 		} catch (SQLException e) {
@@ -149,6 +154,7 @@ public class PersonaJDBC {
 			
 			preparedStatement.setString(index++, persona.getNombre());
 			preparedStatement.setString(index++, persona.getApellidos());
+			preparedStatement.setBytes(index++, persona.getFoto());
 			preparedStatement.setInt(index, persona.getIdPersona());
 			
 			rows = preparedStatement.executeUpdate();
