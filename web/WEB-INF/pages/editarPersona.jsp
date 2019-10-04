@@ -3,6 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Sistema web GA</title>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/funciones.js"></script>
 </head>
 <body>
 	<h1>Editar Persona</h1>
